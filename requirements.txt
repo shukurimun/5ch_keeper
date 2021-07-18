@@ -1,0 +1,6 @@
+selenium
+webdriver-manager
+plyer
+requests
+beautifulsoup4
+pandas
