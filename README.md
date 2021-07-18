@@ -1,2 +1,2 @@
 # 5ch_keeper
-for 5ch thread keep active.
+To Keep thread active.
