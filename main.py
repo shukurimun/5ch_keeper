@@ -1,9 +1,8 @@
 import json
 import time
+import random
 
-import load_post
-import utils
-import write_thread
+from lib import load_post, utils, write_thread
 
 
 def main():
@@ -18,13 +17,16 @@ def main():
 
     for keyword in keywords:
         if len(new_post[new_post['message'].str.contains(keyword)]) > 0:
-            utils.notify_desktop('新規来たかも', 'スレ確認して')
+            utils.notify_desktop('新規来たかも', list(new_post[new_post['message'].str.contains(keyword)]['message'])[0])
 
 
 def load_setting():
     with open('setting.json', encoding='utf-8') as f:
         settings = json.load(f)
-    return settings['url'], settings['time'], settings['message'], settings['keyword']
+    if type(settings['message']) is str:
+        return settings['url'], settings['time'], settings['message'], settings['keyword']
+    else:
+        return settings['url'], settings['time'], random.choice(settings['message']), settings['keyword']
 
 
 if __name__ == "__main__":

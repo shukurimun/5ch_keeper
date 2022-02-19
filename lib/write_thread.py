@@ -7,10 +7,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
-import utils
+from lib import utils
 
 
-def write_to_5ch(url: str, message='ほっしゅほっしゅほっしゅ', name='VIPdeFF14'):
+def write_to_5ch(url: str, message='ほっしゅほっしゅほっしゅ', name='VIPdeFF14ちょうかしこい保守ツール君'):
     now = datetime.datetime.now()
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')
@@ -20,12 +20,17 @@ def write_to_5ch(url: str, message='ほっしゅほっしゅほっしゅ', name=
         driver.get(url)
         wait.until(EC.presence_of_element_located(
             (By.XPATH, '//div[@class="formbox"]')))
-        # driver.find_element_by_name('FROM').send_keys(name)
+        driver.find_element_by_name('FROM').send_keys(name)
         driver.find_element_by_tag_name("textarea").send_keys(message)
         time.sleep(3)
+        '''
         wait.until(
             EC.element_to_be_clickable(
                 (By.XPATH, '//input[@class="submitbtn btn"]'))).click()
+        '''
+        element = driver.find_element_by_xpath('//input[@class="submitbtn btn"]')
+        driver.execute_script('arguments[0].click();', element)
+
         wait.until_not(
             EC.presence_of_element_located(
                 (By.XPATH, '//div[@class="formbox"]')))
@@ -45,7 +50,5 @@ def write_to_5ch(url: str, message='ほっしゅほっしゅほっしゅ', name=
 
 
 if __name__ == '__main__':
-    url = 'http://hebi.5ch.net/test/read.cgi/news4vip/1625935376/'
-    while True:
-        write_to_5ch(url)
-        time.sleep(1800)
+    url = 'https://mi.5ch.net/test/read.cgi/news4vip/1643963150/'
+    write_to_5ch(url)
