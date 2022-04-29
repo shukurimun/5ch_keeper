@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
-from lib import utils
+from . import utils
 
 
 def write_to_5ch(url: str, message='ほっしゅほっしゅほっしゅ', name='VIPdeFF14ちょうかしこい保守ツール君'):
